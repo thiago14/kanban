@@ -4,6 +4,7 @@ export default class Card {
         readonly idCard: number | undefined,
         readonly title: string,
         readonly estimative: number,
+        readonly color: string,
         readonly order: number = 0,
     ) {
         if (title === '') throw new Error('Title is required');

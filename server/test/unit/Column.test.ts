@@ -1,4 +1,4 @@
-import Column from '../src/domain/entity/Column';
+import Column from '../../src/domain/entity/Column';
 
 const ColumnModel = {
     idBoard: undefined,
