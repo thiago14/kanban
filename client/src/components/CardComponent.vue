@@ -32,6 +32,7 @@ defineProps(['board', 'card']);
     height: 20px;
     color: white;
     border: 0;
+    cursor: pointer;
 }
 .btn-add {
     background: #5ef5d9;

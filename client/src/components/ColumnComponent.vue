@@ -13,6 +13,7 @@ defineProps(['board', 'column'])
                 v-for="card in column.cards"
                 :key="card.idCard"
                 :card="card"
+                :board="board"
             />
             <NewCardComponent :board="board" :column="column" />
         </div>

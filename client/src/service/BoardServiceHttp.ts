@@ -1,6 +1,6 @@
 import Board from '../entities/Board';
 import HttpClient from '../infra/http/HttpClientInterface';
-import BoardServiceInterface from './BoardServiceInterface';
+import BoardServiceInterface, { SaveColumnInput } from './BoardServiceInterface';
 
 export default class BoardService implements BoardServiceInterface {
 
@@ -16,6 +16,11 @@ export default class BoardService implements BoardServiceInterface {
             }
         }
         return board;
+    }
+
+    async saveColumn(column: SaveColumnInput): Promise<number> {
+        const idColumn = await this.httpClient.post(`${this.baseUrl}/boards/${column.idBoard}/columns`,column);
+        return idColumn;
     }
 
 }

@@ -8,8 +8,8 @@ let columnName = ref('');
 <template>
     <div class="column new-column">
         <h3>Nova coluna</h3>
-        <input type="text" v-model="columnName" placeholder="Nome da coluna"/>
-        <button class="add" type="button" @click="board.addColumn(columnName, true)">Add</button>
+        <input class="new-column-input" type="text" v-model="columnName" placeholder="Nome da coluna"/>
+        <button class="add new-column-add" type="button" @click="board.addColumn(columnName, true)">Add</button>
     </div>
 </template>
 
