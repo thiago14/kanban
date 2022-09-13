@@ -4,3 +4,28 @@
     padding: 0;
 }
 html, body { width: 100%; }
+ul,ol {
+    list-style: none;
+}
+
+input {
+    line-height: 14px;
+    border-radius: 3px 0 0 3px;
+    border: 1px solid #ccc;
+    font-size: 12px;
+    padding: .2rem;
+    height: 30px;
+}
+
+button.add {
+    background: #4646f5;
+    height: 30px;
+    padding-inline: .4rem;
+    color: white;
+    border-radius: 0 3px 3px 0 ;
+}
+
+button.add:hover {
+    cursor: pointer;
+    background: #2929f3;
+}

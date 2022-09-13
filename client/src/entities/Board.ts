@@ -15,10 +15,10 @@ export default class Board {
         this.columns.push(new Column(columnName, hasEstimative));
     }
 
-    addCard(columnName: string, cardTitle: string, cardEstimative: number) {
+    addCard(columnName: string, cardTitle: string, cardEstimative: number, cardColor: string = 'white') {
         const column = this.columns.find((column: Column) => column.name == columnName);
         if (!column) throw new Error("Column not found");
-        const card = new Card(cardTitle, cardEstimative, 'white');
+        const card = new Card(cardTitle, cardEstimative, cardColor);
         column.addCard(card);
     }
 

@@ -1,0 +1,38 @@
+<script setup lang="ts">
+import ColumnComponent from './ColumnComponent.vue';
+import NewColumnComponent from './NewColumnComponent.vue';
+defineProps(['board']);
+</script>
+
+<template>
+    <section v-if="board" class="board">
+        <header>
+            <h2>{{ board.name }} (<span id="estimative">{{ board.getEstimative() }}</span>)</h2>
+        </header>
+        <ul class="columns">
+            <li
+                v-for="column in board.columns"
+                :key="column.idColumn"
+            >
+                <ColumnComponent :board="board" :column="column" ></ColumnComponent>
+            </li>
+            <NewColumnComponent :board="board" />
+        </ul>
+    </section>
+</template>
+
+<style scoped>
+.board {
+    padding: 1rem;
+}
+.board header {
+    margin-bottom: 1rem;
+}
+.columns {
+    display: flex;
+    flex: 1;
+    gap: 5px;
+    text-align: center;
+}
+
+</style>
