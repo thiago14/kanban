@@ -18,7 +18,7 @@ export default class ColumnRepositoryDatabase implements ColumnRepository {
     }
 
     async findAllByidBoard(id: number): Promise<Column[]> {
-        const columnsData = await this.connection.query('SELECT id_board, id_column, name, has_estimative FROM columns where id_board = ?', [id]);
+        const columnsData = await this.connection.query('SELECT `id_board`, `id_column`, `name`, `has_estimative` FROM columns WHERE `id_board` = ?', [id]);
         const columns: Column[] = [];
         for(const columnData of columnsData) {
             columns.push(this._convertColumn(columnData));
@@ -27,25 +27,25 @@ export default class ColumnRepositoryDatabase implements ColumnRepository {
     }
 
     async get(id: number): Promise<Column> {
-        const [columnData] = await this.connection.query('SELECT * FROM columns WHERE id_column = ?', [id]);
+        const [columnData] = await this.connection.query('SELECT * FROM columns WHERE `id_column` = ?', [id]);
         if (!columnData) throw new Error("Column not found");
         return this._convertColumn(columnData);
     }
 
     async save(column: Column): Promise<number> {
         const columnData = await this.connection.query(
-        "INSERT INTO columns (id_board, name, has_estimative) values (?, ?, ?)",
+        "INSERT INTO columns (`id_board`, `name`, `has_estimative`) VALUES (?, ?, ?)",
         [column.idBoard, column.name, column.hasEstimative]
         );
         return columnData.insertId;
     }
 
     async update(column: Column): Promise<void> {
-        await this.connection.query("UPDATE columns (name) set name = ? where id_column = ?", [column.name, column.idColumn]);
+        await this.connection.query("UPDATE columns SET `name` = ? WHERE `id_column` = ?", [column.name, column.idColumn]);
     }
 
     async delete(id: number): Promise<void> {
-        await this.connection.query("DELETE FROM Columns where id_Column = ?", [id]);
+        await this.connection.query("DELETE FROM columns WHERE `id_column` = ?", [id]);
     }
 
 }

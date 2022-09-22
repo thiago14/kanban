@@ -1,15 +1,22 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { reactive } from 'vue';
 
-defineProps(['board']);
-let columnName = ref('');
+const emit = defineEmits(['add-column']);
+const form = reactive({
+    columnName: ''
+});
+
+function handleNewColumn() {
+    emit('add-column', form.columnName);
+    form.columnName = '';
+}
 </script>
 
 <template>
     <div class="column new-column">
         <h3>Nova coluna</h3>
-        <input class="new-column-input" type="text" v-model="columnName" placeholder="Nome da coluna"/>
-        <button class="add new-column-add" type="button" @click="board.addColumn(columnName, true)">Add</button>
+        <input class="new-column-input" type="text" v-model="form.columnName" placeholder="Nome da coluna"/>
+        <button class="add new-column-add" type="button" @click="handleNewColumn">Add</button>
     </div>
 </template>
 

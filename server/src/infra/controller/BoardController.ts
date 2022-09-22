@@ -74,7 +74,7 @@ export default class BoardController {
 
         http.route('put', '/boards/:idBoard/columns/:idColumn/cards/:idCard', async function(params: any, body: any) {
             const cardService = new CardService(cardRepository);
-            await cardService.updateCard(body);
+            return cardService.updateCard(body);
         });
 
         http.route('delete', '/boards/:idBoard/columns/:idColumn/cards/:idCard', async function(params: any) {

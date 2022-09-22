@@ -1,15 +1,24 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { reactive } from 'vue';
 
-let cardTitle = ref('');
+const emit = defineEmits(['add-card']);
+const form = reactive({
+    cardTitle: ''
+});
+
+function handleNewCard() {
+    emit('add-card', form.cardTitle);
+    form.cardTitle = '';
+}
+
 defineProps(['board', 'column']);
 </script>
 
 <template>
     <div class="card new-card">
         <h4>Novo card</h4>
-        <input type="text" v-model="cardTitle" placeholder="Título do card"/>
-        <button type="button" class="add" @click="board.addCard(column.name, cardTitle, 0)">Add</button>
+        <input type="text" v-model="form.cardTitle" placeholder="Título do card"/>
+        <button type="button" class="add" @click="handleNewCard">Add</button>
     </div>
 </template>
 

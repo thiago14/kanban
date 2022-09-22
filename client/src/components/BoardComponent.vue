@@ -1,7 +1,17 @@
 <script setup lang="ts">
+import Board from '../entities/Board';
 import ColumnComponent from './ColumnComponent.vue';
 import NewColumnComponent from './NewColumnComponent.vue';
-defineProps(['board']);
+const props = defineProps({
+    board: {
+        type: Board,
+        required: true,
+    }
+});
+
+function handlerAddColumn(columnName: string):void {
+    props.board.addColumn(undefined, columnName, true);
+}
 </script>
 
 <template>
@@ -16,7 +26,7 @@ defineProps(['board']);
             >
                 <ColumnComponent :board="board" :column="column" ></ColumnComponent>
             </li>
-            <NewColumnComponent :board="board" />
+            <NewColumnComponent @add-column="handlerAddColumn" />
         </ul>
     </section>
 </template>

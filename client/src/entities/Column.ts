@@ -5,13 +5,20 @@ export default class Column {
 
     constructor(
         readonly name: string,
-        readonly hasEstimative: boolean
+        readonly hasEstimative: boolean,
+        readonly idColumn?: number
     ) {
         this.cards = [];
     }
 
     addCard(card: Card) {
         this.cards.push(card);
+    }
+
+    deleteCard(idCard: number) {
+        const card = this.cards.find(card => card.idCard === idCard);
+        if (!card) throw new Error("Card not found");
+        this.cards.splice(this.cards.indexOf(card), 1);
     }
 
     getEstimative() {

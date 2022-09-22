@@ -16,7 +16,7 @@ export default class BoardRepositoryDatabase implements BoardRepository {
     }
 
     async findAll(): Promise<Board[]> {
-        const boardsData = await this.connection.query('SELECT id_board, name FROM boards', []);
+        const boardsData = await this.connection.query('SELECT `id_board`, `name` FROM boards', []);
         const boards: Board[] = [];
         for(const boardData of boardsData) {
             boards.push(this._convertBoard(boardData));
@@ -25,22 +25,22 @@ export default class BoardRepositoryDatabase implements BoardRepository {
     }
 
     async get(id: number): Promise<Board> {
-        const [boardData] = await this.connection.query('SELECT * FROM boards WHERE id_board = ?', [id]);
+        const [boardData] = await this.connection.query('SELECT * FROM boards WHERE `id_board` = ?', [id]);
         if (!boardData) throw new Error("Board not found");
         return this._convertBoard(boardData);
     }
 
     async save(board: Board): Promise<number> {
-        const boardData = await this.connection.query("INSERT INTO boards (name) values (?)", [board.name]);
+        const boardData = await this.connection.query("INSERT INTO boards (`name`) VALUES (?)", [board.name]);
         return boardData.insertId;
     }
 
     async update(board: Board): Promise<void> {
-        await this.connection.query("UPDATE boards (name) set name = ? where id_board = ?", [board.name, board.idBoard]);
+        await this.connection.query("UPDATE boards SET `name` = ? WHERE `id_board` = ?", [board.name, board.idBoard]);
     }
 
     async delete(id: number): Promise<void> {
-        await this.connection.query("DELETE FROM boards where id_board = ?", [id]);
+        await this.connection.query("DELETE FROM boards WHERE `id_board` = ?", [id]);
     }
 
 }

@@ -47,7 +47,7 @@ test('Deve salvar e deletar uma coluna', async function() {
     });
     const column = await request(`${baseUrl}/boards/1/columns/${idColumn}`, 'get');
     expect(column.name).toBe('Todo');
-    await request(`${baseUrl}/boards/1/columns/8`, 'delete');
+    await request(`${baseUrl}/boards/1/columns/${idColumn}`, 'delete');
     const columns = await request(`${baseUrl}/boards/1/columns`);
     expect(columns).toHaveLength(3);
 });

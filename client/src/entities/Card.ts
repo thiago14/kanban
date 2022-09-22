@@ -1,15 +1,18 @@
 export default class Card {
+
     constructor(
         readonly title: string,
         public estimative: number,
-        public color: string = 'yellow'
+        readonly idCard?: number,
+        public color: string = 'yellow',
+        public order: number = 0
     ) {}
 
-    increaseEstimative () {
+    increaseEstimative ():void {
         this.estimative++;
     }
 
-    decreaseEstimative () {
+    decreaseEstimative ():void {
         this.estimative--;
     }
 }

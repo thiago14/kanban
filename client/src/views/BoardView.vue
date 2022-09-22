@@ -15,9 +15,25 @@ onMounted(async () => {
     board.on('addColumn', async function(event: DomainEvent) {
         await boardService.saveColumn(event.data);
     });
+    board.on('addCard', async function(event: DomainEvent) {
+        const idCard = await boardService.saveCard(event.data);
+        event.data.card.idCard = idCard;
+    });
+    board.on('deleteColumn', async function(event: DomainEvent) {
+        await boardService.deleteColumn(event.data.idBoard, event.data.idColumn);
+    });
+    board.on('deleteCard', async function(event: DomainEvent) {
+        await boardService.deleteCard(event.data.idBoard, event.data.idColumn, event.data.idCard);
+    });
+    board.on('increaseEstimative', async function(event: DomainEvent) {
+        await boardService.updateCard(event.data);
+    });
+    board.on('decreaseEstimative', async function(event: DomainEvent) {
+        await boardService.updateCard(event.data);
+    });
 });
 </script>
 
 <template>
-    <BoardComponent :board="data.board" />
+    <BoardComponent :board="data.board" v-if="data.board" />
 </template>

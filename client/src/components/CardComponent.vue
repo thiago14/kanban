@@ -1,13 +1,16 @@
 <script setup lang="ts">
 
-defineProps(['board', 'card']);
+defineProps(['board', 'column', 'card']);
 </script>
 
 <template>
     <li class="card">
         <h4 class="card-title">{{ card.title }} <span class="card-estimative">{{ card.estimative }}</span></h4>
-        <button type="button" class="btn btn-add" @click="board?.increaseEstimative(card)">+</button>
-        <button type="button" class="btn btn-minus" @click="board?.decreaseEstimative(card)">-</button>
+        <div class="buttons">
+            <button type="button" class="btn btn-add" @click="board?.increaseEstimative(column, card)">+</button>
+            <button type="button" class="btn btn-minus" @click="board?.decreaseEstimative(column, card)">-</button>
+            <button type="button" class="btn btn-trash" @click="board?.deleteCard(column, card.idCard)"><img src="../assets/trash.svg" /></button>
+        </div>
     </li>
 </template>
 
@@ -21,6 +24,13 @@ defineProps(['board', 'card']);
     margin-bottom: 10px;
     border-radius: 7px;
     padding: .5rem;
+}
+.card .buttons {
+    gap: 4px;
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
 }
 .card h4 {
     display: flex;
@@ -40,5 +50,9 @@ defineProps(['board', 'card']);
 }
 .btn-minus {
     background: #fb9f6e;
+}
+.btn-trash {
+    width: 17px;
+    margin-left: 4px;
 }
 </style>
