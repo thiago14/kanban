@@ -20,13 +20,7 @@ export const useAuthStore = defineStore('authStore', {
         async login(username: string, password: string) {
             this.session = await this.authService.login(username, password);
             localStorage.setItem('token', this.session.token);
-            console.log('this.$router', this.$router);
-            this.$router.push("/boards").then(() => {
-                console.log('this.$router', this.$router);
-                console.log('success') /* success triggered */
-            }).catch((error) => {
-                console.log('fail', error);
-            });
+            this.$router.push("/boards");
         },
         logout() {
             this.session = {};
