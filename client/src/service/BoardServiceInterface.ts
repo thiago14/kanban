@@ -2,6 +2,7 @@ import Board from '../entities/Board';
 
 export default interface BoardService {
     getBoard(idBoard: number): Promise<Board>;
+    getBoards(): Promise<Board[]>;
     saveBoard(board: SaveBoardInput): Promise<number>;
     saveColumn(column: SaveColumnInput): Promise<number>;
     deleteColumn(idBoard: number, idColumn: number): Promise<void>;

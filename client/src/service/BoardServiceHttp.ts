@@ -6,6 +6,15 @@ export default class BoardService implements BoardServiceInterface {
 
     constructor(readonly httpClient: HttpClient, readonly baseUrl: string) {}
 
+    async getBoards(): Promise<Board[]> {
+        const boardsData = await this.httpClient.get(`${this.baseUrl}/boards`);
+        const boards: Board[] = [];
+        for( const boardData of boardsData) {
+            boards.push(new Board(boardData.idBoard, boardData.name));
+        }
+        return boards;
+    }
+
     async getBoard(idBoard: number): Promise<Board> {
         const boardData = await this.httpClient.get(`${this.baseUrl}/boards/${idBoard}`);
         const board = new Board(boardData.idBoard, boardData.name);

@@ -58,7 +58,6 @@ export default class Board extends BaseEntity {
 
     increaseEstimative(column: Column, card: Card) {
         card.increaseEstimative();
-        console.log('column', column);
         this.publish(new DomainEvent('increaseEstimative', {
             idBoard: this.idBoard,
             idColumn: column.idColumn,

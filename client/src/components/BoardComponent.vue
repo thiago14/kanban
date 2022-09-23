@@ -17,6 +17,7 @@ function handlerAddColumn(columnName: string):void {
 <template>
     <section v-if="board" class="board">
         <header>
+            <RouterLink class="back" to="/boards">Boards</RouterLink>
             <h2>{{ board.name }} (<span id="estimative">{{ board.getEstimative() }}</span>)</h2>
         </header>
         <ul class="columns">
@@ -34,6 +35,11 @@ function handlerAddColumn(columnName: string):void {
 <style scoped>
 .board {
     padding: 1rem;
+}
+.board .back {
+
+    display: block;
+    margin-bottom: 1rem;
 }
 .board header {
     margin-bottom: 1rem;
