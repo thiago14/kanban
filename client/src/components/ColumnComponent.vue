@@ -21,7 +21,7 @@ function handlerNewCar(cardTitle: string):void {
 </script>
 
 <template>
-    <div class="column">
+    <div class="column"  @dragover="board.moveCard(column)">
         <header>
             <h3>{{ column.name }}</h3>
             <div>

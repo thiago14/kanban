@@ -34,6 +34,9 @@ onMounted(async () => {
     board.on('decreaseEstimative', async function(event: DomainEvent) {
         await boardService.updateCard(event.data);
     });
+    board.on('updatePositionMap', async function(event: DomainEvent) {
+        await boardService.updatePositionMap(event.data);
+    });
 });
 </script>
 

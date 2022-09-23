@@ -1,6 +1,12 @@
 import Board from '../entities/Board';
 import HttpClient from '../infra/http/HttpClientInterface';
-import BoardServiceInterface, { SaveBoardInput, SaveCardInput, SaveColumnInput, UpdateCardInput } from './BoardServiceInterface';
+import BoardServiceInterface, {
+    SaveBoardInput,
+    SaveCardInput,
+    SaveColumnInput,
+    UpdateCardInput,
+    UpdatePositionInput
+} from './BoardServiceInterface';
 
 export default class BoardService implements BoardServiceInterface {
 
@@ -50,5 +56,9 @@ export default class BoardService implements BoardServiceInterface {
 
     async updateCard(card: UpdateCardInput): Promise<void> {
         return this.httpClient.put(`${this.baseUrl}/boards/${card.idBoard}/columns/${card.idColumn}/cards/${card.idCard}`, card);
+    }
+
+    async updatePositionMap(input: UpdatePositionInput): Promise<void> {
+        await this.httpClient.post(`${this.baseUrl}/boards/${input.idBoard}/updatePositionMap`, input.positionMap);
     }
 }

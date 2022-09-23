@@ -15,8 +15,9 @@ export default class Column {
         this.cards.push(card);
     }
 
-    deleteCard(idCard: number) {
-        const card = this.cards.find(card => card.idCard === idCard);
+    deleteCard(idCard: number|undefined) {
+        if (this.cards.length === 0 || !idCard) return;
+        const card = this.cards.find(card => card?.idCard === idCard);
         if (!card) throw new Error("Card not found");
         this.cards.splice(this.cards.indexOf(card), 1);
     }

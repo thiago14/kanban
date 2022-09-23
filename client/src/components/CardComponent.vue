@@ -1,10 +1,33 @@
 <script setup lang="ts">
+import Board from '../entities/Board';
+import Card from '../entities/Card';
+import Column from '../entities/Column';
 
-defineProps(['board', 'column', 'card']);
+defineProps({
+    board: {
+        type: Board,
+        required: true,
+    },
+    column: {
+        type: Column,
+        required: true,
+    },
+    card: {
+        type: Card,
+        required: true,
+    },
+});
+
 </script>
 
 <template>
-    <li class="card">
+    <li
+        class="card"
+        draggable="true"
+        @dragstart="board.selectCard(column, card)"
+        @dragend="board.resetCard()"
+        @dragover="board.swap(card)"
+    >
         <h4 class="card-title">{{ card.title }} <span class="card-estimative">{{ card.estimative }}</span></h4>
         <div class="buttons">
             <button type="button" class="btn btn-add" @click="board?.increaseEstimative(column, card)">+</button>
@@ -54,5 +77,6 @@ defineProps(['board', 'column', 'card']);
 .btn-trash {
     width: 17px;
     margin-left: 4px;
+    background-color: transparent;
 }
 </style>
